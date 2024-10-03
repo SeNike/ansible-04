@@ -1,10 +1,16 @@
 # Домашнее задание к занятию 3 «Использование Ansible»
 
-![img](https://github.com/SeNike/Study_24/blob/main/ansible-02/ans3.1.png)
-![img](https://github.com/SeNike/Study_24/blob/main/ansible-02/ans3.2.png)
-![img](https://github.com/SeNike/Study_24/blob/main/ansible-02/ans3.3.png)
+![img](https://github.com/SeNike/Study_24/blob/main/ansible-02/4.1.png)
+![img](https://github.com/SeNike/Study_24/blob/main/ansible-02/4.2.png)
 
-[README.md к Playbook](https://github.com/SeNike/ansible_03/blob/main/playbook/README.md)
+[README.md к Playbook](https://github.com/SeNike/ansible-04/blob/main/playbook/README.md)
+
+##Роли
+
+[Lighthouse](https://github.com/SeNike/ansible-lighthouse.git)
+[Vector](https://github.com/SeNike/ansible-vector.git)
+[Nginx](https://github.com/SeNike/ansible-nginx.git)
+
 
 Также выполнена автоматизация всего процесса от создания VM в YandexCloud до настройки серверов. 
 
