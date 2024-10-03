@@ -1,4 +1,4 @@
-# Домашнее задание к занятию 3 «Использование Ansible»
+# Домашнее задание к занятию 4 «Работа с roles»
 
 ![img](https://github.com/SeNike/Study_24/blob/main/ansible-02/4.1.png)
 ![img](https://github.com/SeNike/Study_24/blob/main/ansible-02/4.2.png)
