@@ -1,0 +1,19 @@
+---
+# tasks file for nginx
+- name: Nginx | Install epel-release
+  become: true
+  ansible.builtin.yum:
+    name: epel-release
+    state: present
+- name: Nginx | Install Nginx
+  become: true
+  ansible.builtin.yum:
+    name: nginx
+    state: present
+- name: Nginx | Create config
+  become: true
+  ansible.builtin.template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    mode: '0644'
+  notify: start-nginx
