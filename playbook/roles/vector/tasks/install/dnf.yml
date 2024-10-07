@@ -1,0 +1,49 @@
+---
+#Main installation actions
+#https://clickhouse.com/docs/en/getting-started/#installation
+
+- name: Ensure CentOS repos use vault
+  become: true
+  ansible.builtin.shell: |
+    if ! grep -q /etc/yum.repos.d/CentOS-*.repo; then
+      sed -i 's|mirrorlist=http://mirrorlist.centos.org|#mirrorlist=http://mirrorlist.centos.org|g' /etc/yum.repos.d/CentOS-*.repo &&
+      sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*.repo
+    fi
+  register: update_repo
+  changed_when: update_repo.stdout != "" 
+
+- name: Vector_dist
+  ansible.builtin.get_url:
+    url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.x86_64.rpm"
+    dest: "./vector-{{ vector_version }}-1.x86_64.rpm"
+    validate_certs: false
+    use_proxy: false 
+
+- name: Install Vector
+  become: true
+  ansible.builtin.yum:
+    name: "./vector-{{ vector_version }}-1.x86_64.rpm"
+    disable_gpg_check: true
+  when: update_repo is not failed
+
+
+
+- name: Install Vector
+  become: true
+  ansible.builtin.yum:
+    name: "./vector-{{ vector_version }}-1.x86_64.rpm"
+    disable_gpg_check: true
+- name: Vector | Create Vector service
+  become: true
+  ansible.builtin.template:
+    src: vector.service.j2
+    dest: /etc/systemd/system/vector.service
+    mode: '0644'  
+- name: Deploy Vector configuration
+  become: true
+  ansible.builtin.template:
+    src: templates/vector.yml.j2
+    dest: /etc/vector/vector.yml
+    mode: "0644"              
+  notify:
+    - Start vector service

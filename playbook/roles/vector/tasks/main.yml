@@ -1,0 +1,37 @@
+---
+# tasks file for clickhouse
+- name: 'Include OS Family Specific Variables'
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_os_family | lower }}.yml"
+        - 'empty.yml'
+      paths:
+        - 'vars'
+  tags: [always]
+
+#- name: Print centos8 variables
+#  ansible.builtin.debug:
+#    var: hostvars['centos8']
+
+#- name: Print ubuntu variables
+#  ansible.builtin.debug:
+#    var: hostvars['ubuntu']
+
+- include_tasks: precheck.yml
+  tags: [always]
+
+- include_tasks:
+    file: "{{ lookup('first_found', params) }}"
+    apply:
+      tags: [install]
+  vars:
+    params:
+      files:
+        - "install/{{ ansible_pkg_mgr }}.yml"
+        - 'empty.yml'
+  tags: [install]
+
+
+

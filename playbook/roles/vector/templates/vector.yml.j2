@@ -1,0 +1,8 @@
+[sources.stdin]
+type = "stdin"
+
+[sinks.my_sink]
+type = "console"
+inputs = ["stdin"]
+
+encoding.codec = "text"

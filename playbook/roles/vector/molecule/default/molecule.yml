@@ -1,0 +1,19 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: centos8
+    image: docker.io/pycontribs/centos:8
+    pre_build_image: true
+    privileged: true
+    command: "/usr/sbin/init"
+  - name: ubuntu
+    image: docker.io/pycontribs/ubuntu:latest
+    pre_build_image: true  
+    privileged: true
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

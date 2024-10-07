@@ -1,0 +1,2 @@
+---
+vector_repo: "$(curl -l https://setup.vector.dev)"
