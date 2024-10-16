@@ -46,4 +46,4 @@
     dest: /etc/vector/vector.yml
     mode: "0644"              
   notify:
-    - Start vector service
+    - Start vector manually
